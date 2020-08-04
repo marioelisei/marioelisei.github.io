@@ -10,5 +10,5 @@ marioelisei.github.io
 
 ====
 ### 
-* On repo, I have my resume 
+* On repo, have my resume 
 * marioelisei@gmail.com
