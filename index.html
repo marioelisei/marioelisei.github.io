@@ -409,10 +409,13 @@
   /* ── CONTACT ── */
   .contact {
     padding: 5rem 2.5rem;
+    min-height: calc(100vh - 120px);
     border-top: 0.5px solid var(--line);
-    display: flex; justify-content: space-between; align-items: flex-end;
+    display: flex; justify-content: space-between; align-items: flex-start;
     gap: 2rem; flex-wrap: wrap;
   }
+  .contact-right { align-self: flex-end; }
+  .contact-left { margin-top: 8rem; }
   .contact-pre {
     font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.18em;
     text-transform: uppercase; color: var(--accent2); margin-bottom: 1rem;
@@ -809,7 +812,7 @@
 <!-- CONTACT -->
 <div id="contact"></div>
 <section class="contact">
-  <div>
+  <div class="contact-left">
     <p class="contact-pre" data-en="// get in touch" data-pt="// entre em contato">// get in touch</p>
     <h2 class="contact-heading" data-en="Let's engineer<br>something <b>great.</b>" data-pt="Vamos engenheirar<br>algo <b>incrível.</b>">Let's engineer<br>something <b>great.</b></h2>
     <div class="contact-links">
