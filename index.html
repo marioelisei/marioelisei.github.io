@@ -59,18 +59,17 @@
     color: var(--muted);
   }
   .cc-logo {
-    width: 18px; height: 18px; object-fit: contain;
-    animation: ccpulse 3s ease-in-out infinite;
+    width: 16px; height: 16px; object-fit: contain;
     image-rendering: pixelated;
-    opacity: 0.85;
+    /* Convert white PNG to #D97757 */
+    filter: invert(57%) sepia(52%) saturate(600%) hue-rotate(330deg) brightness(100%) contrast(95%);
+    animation: ccpulse 3s ease-in-out infinite;
   }
-  @keyframes ccpulse { 0%,100% { opacity:0.85; } 50% { opacity:0.2; } }
-  .status-dot {
-    width: 6px; height: 6px; border-radius: 50%; background: var(--accent2);
-    animation: pulse 2s ease-in-out infinite;
-  }
-  .status-text { transition: opacity 0.6s ease; }
-  @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+  @keyframes ccpulse { 0%,100% { opacity:1; } 50% { opacity:0.25; } }
+  .status-text { color: #D97757; }
+  .status-dots { display: inline-flex; gap: 1px; margin-left: 1px; }
+  .status-dots span { opacity: 0.15; transition: opacity 0.2s; }
+  .status-dots span.on { opacity: 1; }
   .nav-links { display: flex; gap: 2rem; align-items: center; }
   .nav-links a {
     font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em;
@@ -110,7 +109,6 @@
     font-size: 0.85rem; line-height: 1.75; color: var(--muted);
     max-width: 36ch; font-weight: 300;
   }
-  .hero-cta { display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap; }
   .btn {
     font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
     text-decoration: none; padding: 0.65rem 1.4rem;
@@ -120,6 +118,16 @@
   }
   .btn.figma-btn { border-color: rgba(162,89,255,0.4); color: rgba(162,89,255,0.7); }
   .btn.figma-btn:hover { border-color: #A259FF; color: #A259FF; background: rgba(162,89,255,0.06); }
+  .hero-cta {
+    display: flex; flex-direction: column; gap: 0.75rem; margin-top: 2.5rem;
+    align-self: flex-start;
+  }
+  .hero-cta-row {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+  }
+  .hero-figma-btn {
+    width: 100%; justify-content: center;
+  }
   .btn.primary { border-color: var(--accent); color: var(--accent); }
   .btn.primary:hover { background: var(--accent); color: #0A0A0B; }
   .hero-bottom {
@@ -321,7 +329,7 @@
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
     .nav { padding: 1.2rem 1.25rem; }
-    .nav-status { display: none; }
+    .nav-status { display: flex; }
     .nav-links { gap: 1.25rem; }
     .hero { grid-template-columns: 1fr; min-height: auto; }
     .hero-left { padding: 3rem 1.25rem; border-right: none; }
@@ -342,6 +350,13 @@
     .contact-right { text-align: left; }
     .footer { padding: 1.25rem; flex-direction: column; gap: 0.75rem; text-align: center; }
     .footer-r { justify-content: center; }
+    .hero-cta-row { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+    .nav-status { gap: 0.35rem; font-size: 0.55rem; }
+    .cc-logo { width: 13px; height: 13px; }
+  }
+  @media (max-width: 480px) {
+    .hero-cta-row { grid-template-columns: 1fr 1fr; }
+    .hero-cta-row a:first-child { grid-column: span 2; }
   }
 </style>
 </head>
@@ -351,9 +366,8 @@
 <nav class="nav">
   <a href="#" class="nav-logo">ME<span>.</span>eng</a>
   <div class="nav-status">
-    <img src="claudecode.webp" alt="Claude Code" class="cc-logo">
-    <span class="status-dot"></span>
-    <span class="status-text"></span>
+    <img src="claudecode-1.png" alt="Claude Code" class="cc-logo">
+    <span class="status-text">AI in progress<span class="status-dots"><span>.</span><span>.</span><span>.</span></span></span>
   </div>
   <div class="nav-links">
     <a href="#work">Work</a>
@@ -371,9 +385,12 @@
       <div class="hero-name-last">Elisei</div>
       <p class="hero-desc">Engineer by training. Designer by discipline. I build systems with structural logic and visual precision — from architecture to interface. Currently applying this at an AI company.</p>
       <div class="hero-cta">
-        <a href="#work" class="btn primary"><i class="ti ti-layout-grid" aria-hidden="true"></i> View work</a>
-        <a href="https://ca.linkedin.com/in/marioelisei" class="btn" target="_blank" rel="noopener"><i class="ti ti-brand-linkedin" aria-hidden="true"></i> LinkedIn</a>
-        <a href="https://be.net/marioelisei" class="btn" target="_blank" rel="noopener"><i class="ti ti-brand-behance" aria-hidden="true"></i> Behance</a>
+        <div class="hero-cta-row">
+          <a href="#work" class="btn primary"><i class="ti ti-layout-grid" aria-hidden="true"></i> View work</a>
+          <a href="https://ca.linkedin.com/in/marioelisei" class="btn" target="_blank" rel="noopener"><i class="ti ti-brand-linkedin" aria-hidden="true"></i> LinkedIn</a>
+          <a href="https://be.net/marioelisei" class="btn" target="_blank" rel="noopener"><i class="ti ti-brand-behance" aria-hidden="true"></i> Behance</a>
+        </div>
+        <a href="mailto:marioelisei@gmail.com?subject=Figma%20Access%20Request&body=Hi%20Mario%2C%20I'd%20like%20to%20request%20access%20to%20your%20Figma%20system%20flows." class="btn figma-btn hero-figma-btn"><i class="ti ti-brand-figma" aria-hidden="true"></i> Request Figma access</a>
       </div>
     </div>
     <div class="hero-bottom">
@@ -636,20 +653,16 @@
 </footer>
 
 <script>
-  // Status text toggle
-  const statusText = document.querySelector('.status-text');
-  const states = ['available for work', 'AI work at the moment'];
-  let si = 0;
-  function cycleStatus() {
-    statusText.style.opacity = '0';
-    setTimeout(() => {
-      si = (si + 1) % states.length;
-      statusText.textContent = states[si];
-      statusText.style.opacity = '1';
-    }, 600);
-  }
-  statusText.textContent = states[0];
-  setInterval(cycleStatus, 4000);
+  // Animated dots
+  const dots = document.querySelectorAll('.status-dots span');
+  let d = 0, growing = true;
+  setInterval(() => {
+    dots.forEach((dot, i) => dot.classList.toggle('on', i <= d));
+    if (growing) { d++; if (d >= dots.length - 1) growing = false; }
+    else { d--; if (d <= 0) growing = true; }
+  }, 400);
+
+  function filterCards(cat, btn) {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('on'));
     btn.classList.add('on');
     const cards = document.querySelectorAll('.card');
