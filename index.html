@@ -91,6 +91,7 @@
     padding: 4rem 2.5rem;
     border-right: 0.5px solid var(--line);
     display: flex; flex-direction: column; justify-content: space-between;
+    overflow: visible;
   }
   .hero-tag {
     font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.16em;
@@ -116,30 +117,51 @@
     font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
     text-decoration: none; padding: 0.65rem 1.4rem;
     border: 0.5px solid var(--line2); color: var(--muted);
-    transition: border-color 0.2s, color 0.2s, background 0.2s;
+    transition: border-color 0.25s, color 0.25s, background 0.25s;
     display: inline-flex; align-items: center; gap: 0.5rem;
     cursor: pointer; background: transparent;
   }
-  /* default hover — same pattern as figma-btn: border + text brighten, very subtle bg */
-  .btn:hover { border-color: var(--text); color: var(--text); background: rgba(240,238,232,0.04); }
-  /* primary (View work) */
-  .btn.primary { border-color: var(--accent); color: var(--accent); }
-  .btn.primary:hover { border-color: var(--accent); color: var(--accent); background: rgba(124,107,255,0.06); }
-  /* individual button colors */
-  .btn-viewwork { border-color: rgba(47,158,126,0.5); color: #2F9E7E; }
-  .btn-viewwork:hover { border-color: #2F9E7E; color: #4DBFA0; background: rgba(47,158,126,0.08); }
-  .btn-linkedin { border-color: rgba(43,70,110,0.7); color: #4A7AB5; }
-  .btn-linkedin:hover { border-color: #4A7AB5; color: #6A9FD4; background: rgba(43,70,110,0.12); }
-  .btn-behance { border-color: rgba(33,124,199,0.5); color: #217CC7; }
-  .btn-behance:hover { border-color: #217CC7; color: #4A9FE0; background: rgba(33,124,199,0.08); }
-  .btn-sendmsg { border-color: rgba(65,95,94,0.7); color: #5A9291; }
-  .btn-sendmsg:hover { border-color: #5A9291; color: #7AAFAE; background: rgba(65,95,94,0.12); }
-  /* figma */
-  .btn.figma-btn { border-color: rgba(162,89,255,0.4); color: rgba(162,89,255,0.7); }
-  .btn.figma-btn:hover { border-color: #A259FF; color: #A259FF; background: rgba(162,89,255,0.06); }
+  /* individual hover colors */
+  .btn-viewwork:hover  { border-color: #2F9E7E; color: #2F9E7E; background: rgba(47,158,126,0.07); }
+  .btn-linkedin:hover  { border-color: #4A7AB5; color: #4A7AB5; background: rgba(43,70,110,0.10); }
+  .btn-behance:hover   { border-color: #217CC7; color: #217CC7; background: rgba(33,124,199,0.07); }
+  .btn-sendmsg:hover   { border-color: #5A9291; color: #5A9291; background: rgba(65,95,94,0.10); }
+  .btn-github:hover    { border-color: var(--text); color: var(--text); background: rgba(240,238,232,0.04); }
+
+  /* ── FIGMA GRADIENT BUTTON ── */
+  .btn.figma-btn {
+    position: relative;
+    overflow: visible;
+    border: none;
+    padding: 0.67rem 1.42rem;
+    color: var(--muted);
+    background: transparent;
+    transition: color 0.5s;
+    z-index: 0;
+  }
+  .btn.figma-btn::before {
+    content: '';
+    position: absolute;
+    inset: -0.5px;
+    border-radius: 0;
+    background: linear-gradient(90deg, #1ABCFE 0%, #A259FF 35%, #F24E1E 70%, #FF7262 100%);
+    background-size: 200% 100%;
+    background-position: 0% 50%;
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+    padding: 0.5px;
+    transition: background-position 0.6s ease;
+    z-index: -1;
+    pointer-events: none;
+  }
+  .btn.figma-btn:hover { color: #fff; }
+  .btn.figma-btn:hover::before { background-position: 100% 50%; }
   .hero-cta {
     display: flex; flex-direction: column; gap: 0.75rem; margin-top: 2.5rem;
-    align-self: flex-start;
+    align-self: flex-start; padding: 1px;
   }
   .hero-cta-row {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
@@ -613,7 +635,7 @@
     <p class="about-body">As a Computer Engineer with a postgraduate specialization in Industrial Automation Engineering, I approach products as interconnected systems. Combining advanced expertise in design, UX, and AI, I build scalable solutions for highly complex environments where architecture, usability, automation, and intelligence must operate seamlessly together.</p>
     <div class="about-actions">
       <a href="https://ca.linkedin.com/in/marioelisei" class="btn btn-linkedin" target="_blank" rel="noopener"><i class="ti ti-brand-linkedin" aria-hidden="true"></i> LinkedIn</a>
-      <a href="https://github.com/marioelisei" class="btn" target="_blank" rel="noopener"><i class="ti ti-brand-github" aria-hidden="true"></i> GitHub</a>
+      <a href="https://github.com/marioelisei" class="btn btn-github" target="_blank" rel="noopener"><i class="ti ti-brand-github" aria-hidden="true"></i> GitHub</a>
     </div>
   </div>
   <div class="about-right">
