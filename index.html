@@ -42,7 +42,8 @@
   /* ── NAV ── */
   .nav {
     position: sticky; top: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
     padding: 1.5rem 2.5rem;
     border-bottom: 0.5px solid var(--line);
     background: rgba(10,10,11,0.92);
@@ -51,26 +52,28 @@
   .nav-logo {
     font-family: var(--mono); font-size: 0.85rem;
     color: var(--text); text-decoration: none; letter-spacing: 0.08em;
+    justify-self: start;
   }
   .nav-logo span { color: var(--accent); }
   .nav-status {
     display: flex; align-items: center; gap: 0.5rem;
     font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.1em;
     color: var(--muted);
+    justify-self: center;
+    /* align over the center of the right quadrant block (starts at 50vw) */
+    margin-left: 25%;
   }
   .cc-logo {
-    width: 16px; height: 16px; object-fit: contain;
-    image-rendering: pixelated;
-    /* Convert white PNG to #D97757 */
-    filter: invert(57%) sepia(52%) saturate(600%) hue-rotate(330deg) brightness(100%) contrast(95%);
-    animation: ccpulse 3s ease-in-out infinite;
+    width: 12px; height: 8px;
+    animation: ccpulse 2s ease-in-out infinite;
+    flex-shrink: 0;
   }
-  @keyframes ccpulse { 0%,100% { opacity:1; } 50% { opacity:0.25; } }
+  @keyframes ccpulse { 0%,100% { opacity:1; } 50% { opacity:0.2; } }
   .status-text { color: #D97757; }
   .status-dots { display: inline-flex; gap: 1px; margin-left: 1px; }
   .status-dots span { opacity: 0.15; transition: opacity 0.2s; }
   .status-dots span.on { opacity: 1; }
-  .nav-links { display: flex; gap: 2rem; align-items: center; }
+  .nav-links { display: flex; gap: 2rem; align-items: center; justify-self: end; }
   .nav-links a {
     font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em;
     color: var(--muted); text-decoration: none; text-transform: uppercase;
@@ -328,8 +331,9 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
-    .nav { padding: 1.2rem 1.25rem; }
-    .nav-status { display: flex; }
+    .nav { grid-template-columns: auto 1fr auto; padding: 1.2rem 1.25rem; }
+    .nav-status { margin-left: 0; justify-self: center; font-size: 0.55rem; gap: 0.35rem; }
+    .cc-logo { width: 14px; height: 11px; }
     .nav-links { gap: 1.25rem; }
     .hero { grid-template-columns: 1fr; min-height: auto; }
     .hero-left { padding: 3rem 1.25rem; border-right: none; }
@@ -366,7 +370,22 @@
 <nav class="nav">
   <a href="#" class="nav-logo">ME<span>.</span>eng</a>
   <div class="nav-status">
-    <img src="claudecode-1.png" alt="Claude Code" class="cc-logo">
+    <svg class="cc-logo" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg" fill="#D97757">
+      <!-- body -->
+      <rect x="1" y="0" width="8" height="5"/>
+      <!-- left arm -->
+      <rect x="0" y="2" width="1" height="2"/>
+      <!-- right arm -->
+      <rect x="9" y="2" width="1" height="2"/>
+      <!-- left eye gap -->
+      <rect x="3" y="1" width="1" height="2" fill="#0A0A0B"/>
+      <!-- right eye gap -->
+      <rect x="6" y="1" width="1" height="2" fill="#0A0A0B"/>
+      <!-- left leg -->
+      <rect x="2" y="5" width="2" height="2"/>
+      <!-- right leg -->
+      <rect x="6" y="5" width="2" height="2"/>
+    </svg>
     <span class="status-text">AI in progress<span class="status-dots"><span>.</span><span>.</span><span>.</span></span></span>
   </div>
   <div class="nav-links">
@@ -390,7 +409,7 @@
           <a href="https://ca.linkedin.com/in/marioelisei" class="btn" target="_blank" rel="noopener"><i class="ti ti-brand-linkedin" aria-hidden="true"></i> LinkedIn</a>
           <a href="https://be.net/marioelisei" class="btn" target="_blank" rel="noopener"><i class="ti ti-brand-behance" aria-hidden="true"></i> Behance</a>
         </div>
-        <a href="mailto:marioelisei@gmail.com?subject=Figma%20Access%20Request&body=Hi%20Mario%2C%20I'd%20like%20to%20request%20access%20to%20your%20Figma%20system%20flows." class="btn figma-btn hero-figma-btn"><i class="ti ti-brand-figma" aria-hidden="true"></i> Request Figma access</a>
+        <a href="https://www.figma.com/design/GsycsVjrjQzvRAzWYgmgRy/1---Projects-%7C-Various?node-id=27-529&t=VP6NlUCPEdQ7dRt6-4" class="btn figma-btn hero-figma-btn" target="_blank" rel="noopener"><i class="ti ti-brand-figma" aria-hidden="true"></i> Request Figma access</a>
       </div>
     </div>
     <div class="hero-bottom">
@@ -631,7 +650,7 @@
     <div class="contact-links">
       <a href="mailto:marioelisei@gmail.com" class="btn primary"><i class="ti ti-mail" aria-hidden="true"></i> Send message</a>
       <a href="https://be.net/marioelisei" class="btn" target="_blank" rel="noopener"><i class="ti ti-brand-behance" aria-hidden="true"></i> Behance</a>
-      <a href="mailto:marioelisei@gmail.com?subject=Figma%20Access%20Request&body=Hi%20Mario%2C%20I'd%20like%20to%20request%20access%20to%20your%20Figma%20system%20flows." class="btn figma-btn" target="_blank" rel="noopener"><i class="ti ti-brand-figma" aria-hidden="true"></i> Request Figma access</a>
+      <a href="https://www.figma.com/design/GsycsVjrjQzvRAzWYgmgRy/1---Projects-%7C-Various?node-id=27-529&t=VP6NlUCPEdQ7dRt6-4" class="btn figma-btn" target="_blank" rel="noopener"><i class="ti ti-brand-figma" aria-hidden="true"></i> Request Figma access</a>
     </div>
   </div>
   <div class="contact-right">
