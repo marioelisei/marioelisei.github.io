@@ -74,6 +74,70 @@
   .status-dots { display: inline-flex; gap: 1px; margin-left: 1px; }
   .status-dots span { opacity: 0.15; transition: opacity 0.2s; }
   .status-dots span.on { opacity: 1; }
+  .nav-settings { position: relative; margin-left: 1rem; }
+  .settings-btn {
+    background: none; border: 0.5px solid var(--line2); cursor: pointer;
+    color: var(--muted); padding: 0.3rem 0.5rem; display: flex; align-items: center;
+    font-size: 0.85rem; transition: color 0.2s, border-color 0.2s;
+  }
+  .settings-btn:hover { color: var(--text); border-color: var(--line2); }
+  .settings-dropdown {
+    display: none; position: absolute; top: calc(100% + 0.75rem); right: 0;
+    background: var(--surface); border: 0.5px solid var(--line2);
+    min-width: 160px; z-index: 200; padding: 0.5rem;
+  }
+  .settings-dropdown.open { display: block; }
+  .settings-group { padding: 0.5rem 0; }
+  .settings-group + .settings-group { border-top: 0.5px solid var(--line); }
+  .settings-label {
+    font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--muted); padding: 0.25rem 0.5rem 0.5rem;
+  }
+  .settings-option {
+    display: flex; align-items: center; gap: 0.5rem; width: 100%;
+    background: none; border: none; cursor: pointer; padding: 0.4rem 0.5rem;
+    font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em;
+    color: var(--muted); text-align: left; transition: background 0.15s, color 0.15s;
+    border-radius: 2px;
+  }
+  .settings-option:hover { background: var(--surface2); color: var(--text); }
+  .settings-option.active { background: var(--surface2); color: var(--text); }
+  .settings-option i { font-size: 0.8rem; }
+  .flag-svg { width: 16px; height: 11px; border-radius: 1px; flex-shrink: 0; }
+
+  /* ── LIGHT THEME ── */
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #F5F4F0;
+      --surface: #ECEAE4;
+      --surface2: #E2E0D8;
+      --line: rgba(0,0,0,0.08);
+      --line2: rgba(0,0,0,0.15);
+      --text: #1A1714;
+      --muted: #7A7874;
+      --accent: #5B4FCC;
+      --accent2: #007A5A;
+    }
+  }
+  [data-theme="light"] {
+    --bg: #F5F4F0;
+    --surface: #ECEAE4;
+    --surface2: #E2E0D8;
+    --line: rgba(0,0,0,0.08);
+    --line2: rgba(0,0,0,0.15);
+    --text: #1A1714;
+    --muted: #7A7874;
+    --accent: #5B4FCC;
+    --accent2: #007A5A;
+  }
+  [data-theme="light"] .nav,
+  :root:not([data-theme="dark"]) .nav {
+    background: rgba(245,244,240,0.92);
+  }
+  [data-theme="light"] .btn.figma-btn {
+    background-image: linear-gradient(var(--bg), var(--bg)),
+                      linear-gradient(90deg, #1ABCFE 0%, #A259FF 35%, #F24E1E 70%, #FF7262 100%);
+  }
   .nav-links { display: flex; gap: 2rem; align-items: center; justify-self: end; }
   .nav-links a {
     font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em;
@@ -303,6 +367,10 @@
     filter: grayscale(15%);
     mix-blend-mode: lighten;
   }
+  [data-theme="light"] .avatar-img {
+    mix-blend-mode: normal;
+    border-radius: 50%;
+  }
   .avatar-name {
     font-family: var(--sans); font-size: 0.85rem;
     font-weight: 500; color: var(--text); letter-spacing: -0.01em;
@@ -358,7 +426,7 @@
   .contact-right a {
     color: var(--muted); text-decoration: none; display: block; transition: color 0.2s;
   }
-  .contact-right a:hover { color: #fff; }
+  .contact-right a:hover { color: var(--text); }
 
   /* ── FOOTER ── */
   .footer {
@@ -368,7 +436,7 @@
   .footer-l { font-family: var(--mono); font-size: 0.58rem; color: var(--muted); letter-spacing: 0.1em; }
   .footer-r { font-family: var(--mono); font-size: 0.58rem; color: var(--muted); display: flex; gap: 1.5rem; }
   .footer-r a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
-  .footer-r a:hover { color: #fff; }
+  .footer-r a:hover { color: var(--text); }
 
   /* ── ANIMATIONS ── */
   @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
@@ -437,36 +505,66 @@
       <!-- right leg -->
       <rect x="6" y="5" width="2" height="2"/>
     </svg>
-    <span class="status-text">    AI is generating results<span class="status-dots"><span>.</span><span>.</span><span>.</span></span></span>
+    <span class="status-text">AI in progress<span class="status-dots"><span>.</span><span>.</span><span>.</span></span></span>
   </div>
   <div class="nav-links">
-    <a href="#work">Work</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
+    <a href="#work" data-en="Work" data-pt="Trabalhos">Work</a>
+    <a href="#about" data-en="About" data-pt="Sobre">About</a>
+    <a href="#contact" data-en="Contact" data-pt="Contato">Contact</a>
+    <div class="nav-settings">
+      <button class="settings-btn" onclick="toggleSettings()" title="Settings">
+        <i class="ti ti-adjustments-horizontal"></i>
+      </button>
+      <div class="settings-dropdown" id="settingsDropdown">
+        <div class="settings-group">
+          <div class="settings-label" data-en="Theme" data-pt="Tema">Theme</div>
+          <button class="settings-option" onclick="setTheme('light')" id="opt-light">
+            <i class="ti ti-sun"></i> <span data-en="Light" data-pt="Claro">Light</span>
+          </button>
+          <button class="settings-option" onclick="setTheme('dark')" id="opt-dark">
+            <i class="ti ti-moon"></i> <span data-en="Dark" data-pt="Escuro">Dark</span>
+          </button>
+          <button class="settings-option active" onclick="setTheme('system')" id="opt-system">
+            <i class="ti ti-device-desktop"></i> <span data-en="System" data-pt="Sistema">System</span>
+          </button>
+        </div>
+        <div class="settings-group">
+          <div class="settings-label">Language</div>
+          <button class="settings-option" onclick="setLang('en')">
+            <svg viewBox="0 0 20 14" class="flag-svg"><rect width="20" height="14" fill="#B22234"/><rect y="1.08" width="20" height="1.08" fill="#fff"/><rect y="3.23" width="20" height="1.08" fill="#fff"/><rect y="5.38" width="20" height="1.08" fill="#fff"/><rect y="7.54" width="20" height="1.08" fill="#fff"/><rect y="9.69" width="20" height="1.08" fill="#fff"/><rect y="11.85" width="20" height="1.08" fill="#fff"/><rect width="8" height="7.54" fill="#3C3B6E"/></svg>
+            English
+          </button>
+          <button class="settings-option" onclick="setLang('pt')">
+            <svg viewBox="0 0 20 14" class="flag-svg"><rect width="20" height="14" fill="#009C3B"/><polygon points="10,1.5 18.5,7 10,12.5 1.5,7" fill="#FEDF00"/><circle cx="10" cy="7" r="3" fill="#002776"/></svg>
+            Português
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-left">
-    <p class="hero-tag">AI + Engineer :: Design as a Tool of Precision</p>
+    <p class="hero-tag" data-en="AI + Engineer :: Design as a Tool of Precision" data-pt="IA + Engenheiro :: Design como Ferramenta de Precisão">AI + Engineer :: Design as a Tool of Precision</p>
     <div class="hero-main">
       <div class="hero-name">Mario</div>
       <div class="hero-name-last">Elisei</div>
-      <p class="hero-desc">Engineer with extensive knowledge in the design of complex systems. Using advanced design methodologies, I build systems where architecture and interface intelligence meet.</p>
+      <p class="hero-desc" data-en="Engineer with extensive knowledge in the design of complex systems. Using advanced design methodologies, I build systems where architecture and interface intelligence meet." data-pt="Engenheiro com amplo conhecimento no design de sistemas complexos. Usando metodologias avançadas de design, construo sistemas onde arquitetura e inteligência de interface se encontram.">Engineer with extensive knowledge in the design of complex systems. Using advanced design methodologies, I build systems where architecture and interface intelligence meet.</p>
       <div class="hero-cta">
         <div class="hero-cta-row">
-          <a href="#work" class="btn btn-viewwork"><i class="ti ti-layout-grid" aria-hidden="true"></i> View work</a>
-          <a href="#about" class="btn btn-aboutme"><i class="ti ti-user" aria-hidden="true"></i> About me</a>
+          <a href="#work" class="btn btn-viewwork" data-en="View work" data-pt="Ver trabalhos"><i class="ti ti-layout-grid" aria-hidden="true"></i> <span>View work</span></a>
+          <a href="#about" class="btn btn-aboutme" data-en="About me" data-pt="Sobre mim"><i class="ti ti-user" aria-hidden="true"></i> <span>About me</span></a>
           <a href="https://ca.linkedin.com/in/marioelisei" class="btn btn-linkedin" target="_blank" rel="noopener"><i class="ti ti-brand-linkedin" aria-hidden="true"></i> LinkedIn</a>
         </div>
-        <a href="https://www.figma.com/design/GsycsVjrjQzvRAzWYgmgRy/1---Projects-%7C-Various?node-id=27-529&t=VP6NlUCPEdQ7dRt6-4" class="btn figma-btn hero-figma-btn" target="_blank" rel="noopener"><i class="ti ti-brand-figma" aria-hidden="true"></i> Request Figma access</a>
+        <a href="https://www.figma.com/design/GsycsVjrjQzvRAzWYgmgRy/1---Projects-%7C-Various?node-id=27-529&t=VP6NlUCPEdQ7dRt6-4" class="btn figma-btn hero-figma-btn" target="_blank" rel="noopener" data-en="Request Figma access" data-pt="Solicitar acesso ao Figma"><i class="ti ti-brand-figma" aria-hidden="true"></i> <span>Request Figma access</span></a>
       </div>
     </div>
     <div class="hero-bottom">
-      <span>Based in <b>Brazil at the moment</b></span>
+      <span data-en="Based in" data-pt="Base em">Based in</span> <b>Brazil at the moment</b>
       <span>Est. <b>2010+</b></span>
-      <span><b>+85</b> projects</span>
+      <span><b>+85</b> <span data-en="projects" data-pt="projetos">projects</span></span>
     </div>
   </div>
 
@@ -474,30 +572,30 @@
     <div class="discipline">
       <i class="ti ti-brain disc-icon" aria-hidden="true"></i>
       <div>
-        <div class="disc-label">AI &amp; Intelligence</div>
-        <div class="disc-sub">Intelligent systems, prompt engineering, AI-driven UX</div>
+        <div class="disc-label" data-en="AI &amp; Intelligence" data-pt="IA &amp; Inteligência">AI &amp; Intelligence</div>
+        <div class="disc-sub" data-en="Intelligent systems, prompt engineering, AI-driven UX" data-pt="Sistemas inteligentes, engenharia de prompts, UX com IA">Intelligent systems, prompt engineering, AI-driven UX</div>
       </div>
     </div>
      <div class="discipline">
       <i class="ti ti-cpu disc-icon" aria-hidden="true"></i>
       <div>
-        <div class="disc-label">Engineering</div>
-        <div class="disc-sub">Systems architecture, frontend, design engineering</div>
+        <div class="disc-label" data-en="Engineering" data-pt="Engenharia">Engineering</div>
+        <div class="disc-sub" data-en="Systems architecture, frontend, design engineering" data-pt="Arquitetura de sistemas, frontend, engenharia de design">Systems architecture, frontend, design engineering</div>
       </div>
     </div>
     <div class="discipline">
       <i class="ti ti-vector-bezier-2 disc-icon" aria-hidden="true"></i>
       <div>
-        <div class="disc-label">Design</div>
-        <div class="disc-sub">UI/UX, brand identity, visual systems</div>
+        <div class="disc-label" data-en="Design" data-pt="Design">Design</div>
+        <div class="disc-sub" data-en="UI/UX, brand identity, visual systems" data-pt="UI/UX, identidade de marca, sistemas visuais">UI/UX, brand identity, visual systems</div>
       </div>
     </div>
    
     <div class="discipline">
       <i class="ti ti-robot disc-icon" aria-hidden="true"></i>
       <div>
-        <div class="disc-label">Automation</div>
-        <div class="disc-sub">Pipelines, workflows, custom tooling</div>
+        <div class="disc-label" data-en="Automation" data-pt="Automação">Automation</div>
+        <div class="disc-sub" data-en="Pipelines, workflows, custom tooling" data-pt="Pipelines, workflows, ferramentas customizadas">Pipelines, workflows, custom tooling</div>
       </div>
     </div>
   </div>
@@ -654,8 +752,8 @@
         <div class="avatar-role">Design Engineer</div>
       </div>
     </div>
-    <h2 class="about-heading">AI First.<br>Design Engineer<b> by years.</b></h2>
-    <p class="about-body">Computer Engineer with a postgraduate degree in Industrial Automation Engineering and a strong background in design and systems thinking. By combining engineering, design, and AI-driven product development, I build highly complex digital systems that balance scalable architecture, service integration, usability, and visual precision. Currently, I work as the principal product designer on the AI team, designing systems that integrate artificial intelligence into enterprise platforms, improving workflows, reducing cognitive load, and optimizing operational and energy efficiency.</p>
+    <h2 class="about-heading" data-en="AI First.<br>Design Engineer<b> by years.</b>" data-pt="IA em Primeiro.<br>Design Engineer<b> por anos.</b>">AI First.<br>Design Engineer<b> by years.</b></h2>
+    <p class="about-body" data-en="Computer Engineer with a postgraduate degree in Industrial Automation Engineering and a strong background in design and systems thinking. By combining engineering, design, and AI-driven product development, I build highly complex digital systems that balance scalable architecture, service integration, usability, and visual precision. Currently, I work as the principal product designer on the AI team, designing systems that integrate artificial intelligence into enterprise platforms, improving workflows, reducing cognitive load, and optimizing operational and energy efficiency." data-pt="Engenheiro de Computação com pós-graduação em Engenharia de Automação Industrial e forte background em design e pensamento sistêmico. Combinando engenharia, design e desenvolvimento de produtos com IA, construo sistemas digitais altamente complexos que equilibram arquitetura escalável, integração de serviços, usabilidade e precisão visual. Atualmente, atuo como designer de produto principal no time de IA, projetando sistemas que integram inteligência artificial em plataformas corporativas, melhorando fluxos de trabalho, reduzindo carga cognitiva e otimizando eficiência operacional e energética.">Computer Engineer with a postgraduate degree in Industrial Automation Engineering and a strong background in design and systems thinking. By combining engineering, design, and AI-driven product development, I build highly complex digital systems that balance scalable architecture, service integration, usability, and visual precision. Currently, I work as the principal product designer on the AI team, designing systems that integrate artificial intelligence into enterprise platforms, improving workflows, reducing cognitive load, and optimizing operational and energy efficiency.</p>
     <div class="about-actions">
       <a href="https://github.com/marioelisei" class="btn btn-github" target="_blank" rel="noopener"><i class="ti ti-brand-github" aria-hidden="true"></i> GitHub</a>
       <a href="https://be.net/marioelisei" class="btn btn-behance" target="_blank" rel="noopener"><i class="ti ti-brand-behance" aria-hidden="true"></i> Behance</a>
@@ -709,10 +807,10 @@
 <div id="contact"></div>
 <section class="contact">
   <div>
-    <p class="contact-pre">// get in touch</p>
-    <h2 class="contact-heading">Let's engineer<br>something <b>great.</b></h2>
+    <p class="contact-pre" data-en="// get in touch" data-pt="// entre em contato">// get in touch</p>
+    <h2 class="contact-heading" data-en="Let's engineer<br>something <b>great.</b>" data-pt="Vamos engenheirar<br>algo <b>incrível.</b>">Let's engineer<br>something <b>great.</b></h2>
     <div class="contact-links">
-      <a href="mailto:marioelisei@gmail.com" class="btn btn-sendmsg"><i class="ti ti-mail" aria-hidden="true"></i> Send message</a>
+      <a href="mailto:marioelisei@gmail.com" class="btn btn-sendmsg" data-en="Send message" data-pt="Enviar mensagem"><i class="ti ti-mail" aria-hidden="true"></i> <span>Send message</span></a>
       <a href="https://be.net/marioelisei" class="btn btn-behance" target="_blank" rel="noopener"><i class="ti ti-brand-behance" aria-hidden="true"></i> Behance</a>
       <a href="https://www.figma.com/design/GsycsVjrjQzvRAzWYgmgRy/1---Projects-%7C-Various?node-id=27-529&t=VP6NlUCPEdQ7dRt6-4" class="btn figma-btn" target="_blank" rel="noopener"><i class="ti ti-brand-figma" aria-hidden="true"></i> Request Figma access</a>
     </div>
@@ -736,6 +834,53 @@
 </footer>
 
 <script>
+  // ── SETTINGS DROPDOWN ──
+  function toggleSettings() {
+    document.getElementById('settingsDropdown').classList.toggle('open');
+  }
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.nav-settings')) {
+      document.getElementById('settingsDropdown').classList.remove('open');
+    }
+  });
+
+  // ── THEME ──
+  let currentTheme = 'system';
+  function setTheme(theme) {
+    currentTheme = theme;
+    document.querySelectorAll('.settings-option[id^="opt-"]').forEach(b => b.classList.remove('active'));
+    document.getElementById('opt-' + theme).classList.add('active');
+    if (theme === 'system') {
+      const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+    } else {
+      document.documentElement.setAttribute('data-theme', theme);
+    }
+  }
+  // Init: follow system
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+  document.documentElement.setAttribute('data-theme', prefersDark.matches ? 'dark' : 'light');
+  prefersDark.addEventListener('change', () => { if (currentTheme === 'system') setTheme('system'); });
+
+  // ── LANGUAGE ──
+  let currentLang = 'en';
+  function setLang(lang) {
+    currentLang = lang;
+    document.querySelectorAll('[data-en]').forEach(el => {
+      const val = el.getAttribute('data-' + lang);
+      if (!val) return;
+      if (el.tagName === 'P' || el.tagName === 'H2') {
+        el.innerHTML = val;
+      } else if (el.querySelector('span:not(.status-dots):not(.status-text)') && el.tagName === 'A') {
+        el.querySelector('span').textContent = val;
+      } else if (!el.classList.contains('status-text') && !el.classList.contains('status-dots')) {
+        el.textContent = val;
+      }
+    });
+    document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+    document.getElementById('settingsDropdown').classList.remove('open');
+  }
+
   // Animated dots
   const dots = document.querySelectorAll('.status-dots span');
   let d = 0, growing = true;
