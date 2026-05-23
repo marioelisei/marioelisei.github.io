@@ -106,7 +106,7 @@
   }
   .hero-name-last {
     font-family: var(--sans); font-size: clamp(3.5rem, 7vw, 5.5rem);
-    font-weight: 500; line-height: 1; letter-spacing: -0.02em; color: var(--accent);
+    font-weight: 500; line-height: 1; letter-spacing: -0.02em; color:#D0D0D0);
   }
   .hero-desc {
     margin-top: 2rem;
@@ -130,35 +130,20 @@
 
   /* ── FIGMA GRADIENT BUTTON ── */
   .btn.figma-btn {
-    position: relative;
-    overflow: visible;
-    border: none;
-    padding: 0.67rem 1.42rem;
+    border: 1px solid transparent;
+    background-image: linear-gradient(var(--bg), var(--bg)),
+                      linear-gradient(90deg, #1ABCFE 0%, #A259FF 35%, #F24E1E 70%, #FF7262 100%);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    background-size: 100% 100%, 200% 100%;
+    background-position: 0 0, 0% 50%;
     color: var(--muted);
-    background: transparent;
-    transition: color 0.5s;
-    z-index: 0;
+    transition: color 0.5s, background-position 0.6s ease;
   }
-  .btn.figma-btn::before {
-    content: '';
-    position: absolute;
-    inset: -0.5px;
-    border-radius: 0;
-    background: linear-gradient(90deg, #1ABCFE 0%, #A259FF 35%, #F24E1E 70%, #FF7262 100%);
-    background-size: 200% 100%;
-    background-position: 0% 50%;
-    -webkit-mask:
-      linear-gradient(#fff 0 0) content-box,
-      linear-gradient(#fff 0 0);
-    -webkit-mask-composite: destination-out;
-    mask-composite: exclude;
-    padding: 0.5px;
-    transition: background-position 0.6s ease;
-    z-index: -1;
-    pointer-events: none;
+  .btn.figma-btn:hover {
+    color: #fff;
+    background-position: 0 0, 100% 50%;
   }
-  .btn.figma-btn:hover { color: #fff; }
-  .btn.figma-btn:hover::before { background-position: 100% 50%; }
   .hero-cta {
     display: flex; flex-direction: column; gap: 0.75rem; margin-top: 2.5rem;
     align-self: flex-start; padding: 1px;
@@ -167,7 +152,7 @@
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
   }
   .hero-figma-btn {
-    width: 100%; justify-content: center;
+    width: 100%; justify-content: center; box-sizing: border-box;
   }
   .hero-bottom {
     font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em;
