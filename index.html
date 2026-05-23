@@ -124,10 +124,12 @@
   }
   /* individual hover colors */
   .btn-viewwork:hover  { border-color: #2F9E7E; color: #2F9E7E; background: rgba(47,158,126,0.07); }
+  .btn-aboutme:hover   { border-color: #7C6BFF; color: #7C6BFF; background: rgba(124,107,255,0.07); }
   .btn-linkedin:hover  { border-color: #4A7AB5; color: #4A7AB5; background: rgba(43,70,110,0.10); }
   .btn-behance:hover   { border-color: #217CC7; color: #217CC7; background: rgba(33,124,199,0.07); }
   .btn-sendmsg:hover   { border-color: #5A9291; color: #5A9291; background: rgba(65,95,94,0.10); }
   .btn-github:hover    { border-color: var(--text); color: var(--text); background: rgba(240,238,232,0.04); }
+  .btn-dribbble:hover  { border-color: #EA4C89; color: #EA4C89; background: rgba(234,76,137,0.07); }
 
   /* ── FIGMA GRADIENT BUTTON ── */
   .btn.figma-btn {
@@ -282,10 +284,34 @@
   }
   .about-heading b { font-weight: 500; color: var(--accent); }
   .about-body {
-    font-size: 0.82rem; line-height: 1.85; color: var(--muted);
-    max-width: 38ch;
+    font-size: 0.85rem; line-height: 1.75; color: var(--muted);
+    max-width: 49ch; font-weight: 300;
+    text-align: justify;
   }
   .about-actions { display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
+  .about-avatar {
+    display: flex; align-items: center; gap: 1rem;
+    margin-top: 1.5rem; margin-bottom: 0.5rem;
+  }
+  .avatar-img-wrap {
+    width: 52px; height: 52px; border-radius: 50%;
+    overflow: hidden; flex-shrink: 0;
+    border: 0.5px solid var(--line2);
+  }
+  .avatar-img {
+    width: 100%; height: 100%; object-fit: cover;
+    object-position: center top;
+    filter: grayscale(20%);
+  }
+  .avatar-name {
+    font-family: var(--sans); font-size: 0.85rem;
+    font-weight: 500; color: var(--text); letter-spacing: -0.01em;
+  }
+  .avatar-role {
+    font-family: var(--mono); font-size: 0.6rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); margin-top: 0.2rem;
+  }
   .about-right { padding: 4rem 2.5rem; }
   .stack-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
   .stack-item {
@@ -427,12 +453,12 @@
     <div class="hero-main">
       <div class="hero-name">Mario</div>
       <div class="hero-name-last">Elisei</div>
-      <p class="hero-desc">Computer Engineer with a postgraduate degree in Industrial Automation Engineering and a strong background in design and systems thinking. By combining engineering, design, and AI-driven product development, I build highly complex digital systems that balance scalable architecture, service integration, usability, and visual precision. Currently, I work as the principal product designer on the AI team, designing systems that integrate artificial intelligence into enterprise platforms, improving workflows, reducing cognitive load, and optimizing operational and energy efficiency.</p>
+      <p class="hero-desc">Engineer with extensive knowledge in the design of complex systems. Using advanced design methodologies, I build systems where architecture and interface intelligence meet.</p>
       <div class="hero-cta">
         <div class="hero-cta-row">
           <a href="#work" class="btn btn-viewwork"><i class="ti ti-layout-grid" aria-hidden="true"></i> View work</a>
+          <a href="#about" class="btn btn-aboutme"><i class="ti ti-user" aria-hidden="true"></i> About me</a>
           <a href="https://ca.linkedin.com/in/marioelisei" class="btn btn-linkedin" target="_blank" rel="noopener"><i class="ti ti-brand-linkedin" aria-hidden="true"></i> LinkedIn</a>
-          <a href="https://be.net/marioelisei" class="btn btn-behance" target="_blank" rel="noopener"><i class="ti ti-brand-behance" aria-hidden="true"></i> Behance</a>
         </div>
         <a href="https://www.figma.com/design/GsycsVjrjQzvRAzWYgmgRy/1---Projects-%7C-Various?node-id=27-529&t=VP6NlUCPEdQ7dRt6-4" class="btn figma-btn hero-figma-btn" target="_blank" rel="noopener"><i class="ti ti-brand-figma" aria-hidden="true"></i> Request Figma access</a>
       </div>
@@ -617,11 +643,21 @@
 <section class="about" id="about">
   <div class="about-left">
     <span class="section-title"><span class="section-num">02</span> About</span>
+    <div class="about-avatar">
+      <div class="avatar-img-wrap">
+        <img src="tesla_mario.jpg" alt="Mario Elisei" class="avatar-img">
+      </div>
+      <div class="avatar-info">
+        <div class="avatar-name">Mario Elisei</div>
+        <div class="avatar-role">Design Engineer</div>
+      </div>
+    </div>
     <h2 class="about-heading">AI First.<br>Design Engineer<b> by years.</b></h2>
-    <p class="about-body">As a Computer Engineer with a postgraduate specialization in Industrial Automation Engineering, I approach products as interconnected systems. Combining advanced expertise in design, UX, and AI, I build scalable solutions for highly complex environments where architecture, usability, automation, and intelligence must operate seamlessly together.</p>
+    <p class="about-body">Computer Engineer with a postgraduate degree in Industrial Automation Engineering and a strong background in design and systems thinking. By combining engineering, design, and AI-driven product development, I build highly complex digital systems that balance scalable architecture, service integration, usability, and visual precision. Currently, I work as the principal product designer on the AI team, designing systems that integrate artificial intelligence into enterprise platforms, improving workflows, reducing cognitive load, and optimizing operational and energy efficiency.</p>
     <div class="about-actions">
-      <a href="https://ca.linkedin.com/in/marioelisei" class="btn btn-linkedin" target="_blank" rel="noopener"><i class="ti ti-brand-linkedin" aria-hidden="true"></i> LinkedIn</a>
       <a href="https://github.com/marioelisei" class="btn btn-github" target="_blank" rel="noopener"><i class="ti ti-brand-github" aria-hidden="true"></i> GitHub</a>
+      <a href="https://be.net/marioelisei" class="btn btn-behance" target="_blank" rel="noopener"><i class="ti ti-brand-behance" aria-hidden="true"></i> Behance</a>
+      <a href="http://dribbble.com/marioelisei" class="btn btn-dribbble" target="_blank" rel="noopener"><i class="ti ti-brand-dribbble" aria-hidden="true"></i> Dribbble</a>
     </div>
   </div>
   <div class="about-right">
