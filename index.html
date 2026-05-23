@@ -116,9 +116,25 @@
     font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
     text-decoration: none; padding: 0.65rem 1.4rem;
     border: 0.5px solid var(--line2); color: var(--muted);
-    transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.5rem;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+    display: inline-flex; align-items: center; gap: 0.5rem;
     cursor: pointer; background: transparent;
   }
+  /* default hover — same pattern as figma-btn: border + text brighten, very subtle bg */
+  .btn:hover { border-color: var(--text); color: var(--text); background: rgba(240,238,232,0.04); }
+  /* primary (View work) */
+  .btn.primary { border-color: var(--accent); color: var(--accent); }
+  .btn.primary:hover { border-color: var(--accent); color: var(--accent); background: rgba(124,107,255,0.06); }
+  /* individual button colors */
+  .btn-viewwork { border-color: rgba(47,158,126,0.5); color: #2F9E7E; }
+  .btn-viewwork:hover { border-color: #2F9E7E; color: #4DBFA0; background: rgba(47,158,126,0.08); }
+  .btn-linkedin { border-color: rgba(43,70,110,0.7); color: #4A7AB5; }
+  .btn-linkedin:hover { border-color: #4A7AB5; color: #6A9FD4; background: rgba(43,70,110,0.12); }
+  .btn-behance { border-color: rgba(33,124,199,0.5); color: #217CC7; }
+  .btn-behance:hover { border-color: #217CC7; color: #4A9FE0; background: rgba(33,124,199,0.08); }
+  .btn-sendmsg { border-color: rgba(65,95,94,0.7); color: #5A9291; }
+  .btn-sendmsg:hover { border-color: #5A9291; color: #7AAFAE; background: rgba(65,95,94,0.12); }
+  /* figma */
   .btn.figma-btn { border-color: rgba(162,89,255,0.4); color: rgba(162,89,255,0.7); }
   .btn.figma-btn:hover { border-color: #A259FF; color: #A259FF; background: rgba(162,89,255,0.06); }
   .hero-cta {
@@ -131,8 +147,6 @@
   .hero-figma-btn {
     width: 100%; justify-content: center;
   }
-  .btn.primary { border-color: var(--accent); color: var(--accent); }
-  .btn.primary:hover { background: var(--accent); color: #0A0A0B; }
   .hero-bottom {
     font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em;
     color: var(--muted); display: flex; align-items: center; gap: 2rem;
@@ -269,15 +283,18 @@
   .stack-item {
     border: 0.5px solid var(--line); padding: 1.25rem;
     display: flex; flex-direction: column; gap: 0.5rem;
-    transition: border-color 0.2s;
+    transition: background 0.3s, border-color 0.3s;
+    cursor: default;
   }
-  .stack-item:hover { border-color: var(--accent); }
-  .stack-icon { font-size: 1.2rem; color: var(--muted); transition: color 0.2s; }
+  .stack-item:hover { background: var(--surface); border-color: var(--line2); }
+  .stack-icon { font-size: 1.2rem; color: var(--muted); transition: color 0.3s; }
   .stack-item:hover .stack-icon { color: var(--accent); }
   .stack-name {
     font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--text); margin-top: 0.25rem;
+    text-transform: uppercase; color: var(--muted); margin-top: 0.25rem;
+    transition: color 0.3s;
   }
+  .stack-item:hover .stack-name { color: var(--text); }
   .stack-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.35rem; }
   .tag {
     font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.08em;
@@ -405,9 +422,9 @@
       <p class="hero-desc">Engineer by training. Designer by discipline. I build systems with structural logic and visual precision — from architecture to interface. Currently applying this at an AI company.</p>
       <div class="hero-cta">
         <div class="hero-cta-row">
-          <a href="#work" class="btn primary"><i class="ti ti-layout-grid" aria-hidden="true"></i> View work</a>
-          <a href="https://ca.linkedin.com/in/marioelisei" class="btn" target="_blank" rel="noopener"><i class="ti ti-brand-linkedin" aria-hidden="true"></i> LinkedIn</a>
-          <a href="https://be.net/marioelisei" class="btn" target="_blank" rel="noopener"><i class="ti ti-brand-behance" aria-hidden="true"></i> Behance</a>
+          <a href="#work" class="btn btn-viewwork"><i class="ti ti-layout-grid" aria-hidden="true"></i> View work</a>
+          <a href="https://ca.linkedin.com/in/marioelisei" class="btn btn-linkedin" target="_blank" rel="noopener"><i class="ti ti-brand-linkedin" aria-hidden="true"></i> LinkedIn</a>
+          <a href="https://be.net/marioelisei" class="btn btn-behance" target="_blank" rel="noopener"><i class="ti ti-brand-behance" aria-hidden="true"></i> Behance</a>
         </div>
         <a href="https://www.figma.com/design/GsycsVjrjQzvRAzWYgmgRy/1---Projects-%7C-Various?node-id=27-529&t=VP6NlUCPEdQ7dRt6-4" class="btn figma-btn hero-figma-btn" target="_blank" rel="noopener"><i class="ti ti-brand-figma" aria-hidden="true"></i> Request Figma access</a>
       </div>
@@ -595,7 +612,7 @@
     <h2 class="about-heading">AI First.<br>Design Engineer<b> by years.</b></h2>
     <p class="about-body">As a Computer Engineer with a postgraduate specialization in Industrial Automation Engineering, I approach products as interconnected systems. Combining advanced expertise in design, UX, and AI, I build scalable solutions for highly complex environments where architecture, usability, automation, and intelligence must operate seamlessly together.</p>
     <div class="about-actions">
-      <a href="https://ca.linkedin.com/in/marioelisei" class="btn" target="_blank" rel="noopener"><i class="ti ti-brand-linkedin" aria-hidden="true"></i> LinkedIn</a>
+      <a href="https://ca.linkedin.com/in/marioelisei" class="btn btn-linkedin" target="_blank" rel="noopener"><i class="ti ti-brand-linkedin" aria-hidden="true"></i> LinkedIn</a>
       <a href="https://github.com/marioelisei" class="btn" target="_blank" rel="noopener"><i class="ti ti-brand-github" aria-hidden="true"></i> GitHub</a>
     </div>
   </div>
@@ -648,8 +665,8 @@
     <p class="contact-pre">// get in touch</p>
     <h2 class="contact-heading">Let's engineer<br>something <b>great.</b></h2>
     <div class="contact-links">
-      <a href="mailto:marioelisei@gmail.com" class="btn primary"><i class="ti ti-mail" aria-hidden="true"></i> Send message</a>
-      <a href="https://be.net/marioelisei" class="btn" target="_blank" rel="noopener"><i class="ti ti-brand-behance" aria-hidden="true"></i> Behance</a>
+      <a href="mailto:marioelisei@gmail.com" class="btn btn-sendmsg"><i class="ti ti-mail" aria-hidden="true"></i> Send message</a>
+      <a href="https://be.net/marioelisei" class="btn btn-behance" target="_blank" rel="noopener"><i class="ti ti-brand-behance" aria-hidden="true"></i> Behance</a>
       <a href="https://www.figma.com/design/GsycsVjrjQzvRAzWYgmgRy/1---Projects-%7C-Various?node-id=27-529&t=VP6NlUCPEdQ7dRt6-4" class="btn figma-btn" target="_blank" rel="noopener"><i class="ti ti-brand-figma" aria-hidden="true"></i> Request Figma access</a>
     </div>
   </div>
