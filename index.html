@@ -58,10 +58,18 @@
     font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.1em;
     color: var(--muted);
   }
+  .cc-logo {
+    width: 18px; height: 18px; object-fit: contain;
+    animation: ccpulse 3s ease-in-out infinite;
+    image-rendering: pixelated;
+    opacity: 0.85;
+  }
+  @keyframes ccpulse { 0%,100% { opacity:0.85; } 50% { opacity:0.2; } }
   .status-dot {
     width: 6px; height: 6px; border-radius: 50%; background: var(--accent2);
     animation: pulse 2s ease-in-out infinite;
   }
+  .status-text { transition: opacity 0.6s ease; }
   @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
   .nav-links { display: flex; gap: 2rem; align-items: center; }
   .nav-links a {
@@ -110,7 +118,8 @@
     transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.5rem;
     cursor: pointer; background: transparent;
   }
-  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn.figma-btn { border-color: rgba(162,89,255,0.4); color: rgba(162,89,255,0.7); }
+  .btn.figma-btn:hover { border-color: #A259FF; color: #A259FF; background: rgba(162,89,255,0.06); }
   .btn.primary { border-color: var(--accent); color: var(--accent); }
   .btn.primary:hover { background: var(--accent); color: #0A0A0B; }
   .hero-bottom {
@@ -342,8 +351,9 @@
 <nav class="nav">
   <a href="#" class="nav-logo">ME<span>.</span>eng</a>
   <div class="nav-status">
+    <img src="claudecode.webp" alt="Claude Code" class="cc-logo">
     <span class="status-dot"></span>
-    available for work
+    <span class="status-text"></span>
   </div>
   <div class="nav-links">
     <a href="#work">Work</a>
@@ -359,7 +369,7 @@
     <div class="hero-main">
       <div class="hero-name">Mario</div>
       <div class="hero-name-last">Elisei</div>
-      <p class="hero-desc">Engineer by training. Designer by discipline. I build systems with structural logic and visual precision — from architecture to interface.</p>
+      <p class="hero-desc">Engineer by training. Designer by discipline. I build systems with structural logic and visual precision — from architecture to interface. Currently applying this at an AI company.</p>
       <div class="hero-cta">
         <a href="#work" class="btn primary"><i class="ti ti-layout-grid" aria-hidden="true"></i> View work</a>
         <a href="https://ca.linkedin.com/in/marioelisei" class="btn" target="_blank" rel="noopener"><i class="ti ti-brand-linkedin" aria-hidden="true"></i> LinkedIn</a>
@@ -604,6 +614,7 @@
     <div class="contact-links">
       <a href="mailto:marioelisei@gmail.com" class="btn primary"><i class="ti ti-mail" aria-hidden="true"></i> Send message</a>
       <a href="https://be.net/marioelisei" class="btn" target="_blank" rel="noopener"><i class="ti ti-brand-behance" aria-hidden="true"></i> Behance</a>
+      <a href="mailto:marioelisei@gmail.com?subject=Figma%20Access%20Request&body=Hi%20Mario%2C%20I'd%20like%20to%20request%20access%20to%20your%20Figma%20system%20flows." class="btn figma-btn" target="_blank" rel="noopener"><i class="ti ti-brand-figma" aria-hidden="true"></i> Request Figma access</a>
     </div>
   </div>
   <div class="contact-right">
@@ -625,7 +636,20 @@
 </footer>
 
 <script>
-  function filterCards(cat, btn) {
+  // Status text toggle
+  const statusText = document.querySelector('.status-text');
+  const states = ['available for work', 'AI work at the moment'];
+  let si = 0;
+  function cycleStatus() {
+    statusText.style.opacity = '0';
+    setTimeout(() => {
+      si = (si + 1) % states.length;
+      statusText.textContent = states[si];
+      statusText.style.opacity = '1';
+    }, 600);
+  }
+  statusText.textContent = states[0];
+  setInterval(cycleStatus, 4000);
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('on'));
     btn.classList.add('on');
     const cards = document.querySelectorAll('.card');
