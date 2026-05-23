@@ -212,6 +212,9 @@
     color: #fff;
     background-position: 0 0, 100% 50%;
   }
+  [data-theme="light"] .btn.figma-btn:hover {
+    color: #1A1714;
+  }
   .hero-cta {
     display: flex; flex-direction: column; gap: 0.75rem; margin-top: 2.5rem;
     align-self: flex-start; padding: 1px;
@@ -843,6 +846,9 @@
       document.getElementById('settingsDropdown').classList.remove('open');
     }
   });
+  window.addEventListener('scroll', function() {
+    document.getElementById('settingsDropdown').classList.remove('open');
+  }, { passive: true });
 
   // ── THEME ──
   let currentTheme = 'system';
