@@ -525,12 +525,12 @@
       <!-- right leg -->
       <rect x="6" y="5" width="2" height="2"/>
     </svg>
-    <span class="status-text">AI processing in real time<span class="status-dots"><span>.</span><span>.</span><span>.</span></span></span>
+    <span class="status-text">AI is generating results<span class="status-dots"><span>.</span><span>.</span><span>.</span></span></span>
   </div>
   <div class="nav-links">
-    <a href="#work" data-en="Work" data-pt="Trabalhos">Work</a>
-    <a href="#about" data-en="About" data-pt="Sobre">About</a>
-    <a href="#contact" data-en="Contact" data-pt="Contato">Contact</a>
+    <a href="#work" data-en="Work" data-pt="Trabalhos" onclick="scrollToSection('work');return false;">Work</a>
+    <a href="#about" data-en="About" data-pt="Sobre" onclick="scrollToSection('about');return false;">About</a>
+    <a href="#contact" data-en="Contact" data-pt="Contato" onclick="scrollToSection('contact');return false;">Contact</a>
     <div class="nav-settings">
       <button class="settings-btn" onclick="toggleSettings()" title="Settings">
         <i class="ti ti-adjustments-horizontal"></i>
@@ -575,7 +575,7 @@
       <div class="hero-cta">
         <div class="hero-cta-row">
           <a href="#work" class="btn btn-viewwork" data-en="View work" data-pt="Ver trabalhos"><i class="ti ti-layout-grid" aria-hidden="true"></i> <span>View work</span></a>
-          <a href="#about" class="btn btn-aboutme" data-en="About me" data-pt="Sobre mim"><i class="ti ti-user" aria-hidden="true"></i> <span>About me</span></a>
+          <a href="#about" class="btn btn-aboutme" onclick="scrollToSection('about');return false;" data-en="About me" data-pt="Sobre mim"><i class="ti ti-user" aria-hidden="true"></i> <span>About me</span></a>
           <a href="https://ca.linkedin.com/in/marioelisei" class="btn btn-linkedin" target="_blank" rel="noopener"><i class="ti ti-brand-linkedin" aria-hidden="true"></i> LinkedIn</a>
         </div>
         <a href="https://www.figma.com/design/GsycsVjrjQzvRAzWYgmgRy/1---Projects-%7C-Various?node-id=27-529&t=VP6NlUCPEdQ7dRt6-4" class="btn figma-btn hero-figma-btn" target="_blank" rel="noopener" data-en="Request Figma access" data-pt="Solicitar acesso ao Figma"><i class="ti ti-brand-figma" aria-hidden="true"></i> <span>Request Figma access</span></a>
@@ -859,6 +859,15 @@
 </footer>
 
 <script>
+  // ── SCROLL TO SECTION ──
+  const NAV_HEIGHT = 56;
+  function scrollToSection(id) {
+    const anchor = document.getElementById(id);
+    if (!anchor) return;
+    const top = anchor.getBoundingClientRect().top + window.scrollY - NAV_HEIGHT;
+    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+  }
+
   // ── SETTINGS DROPDOWN ──
   function toggleSettings() {
     document.getElementById('settingsDropdown').classList.toggle('open');
