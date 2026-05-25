@@ -123,11 +123,10 @@
     position: relative; overflow: hidden;
     border: 0.5px solid var(--line);
     margin-bottom: 1rem;
-    min-height: 420px;
-    display: flex; align-items: flex-end;
+    display: flex; align-items: stretch;
     cursor: default;
   }
-  .featured-card--half { min-height: 320px; }
+  .featured-card--half { }
   .featured-cards-row {
     display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
   }
@@ -150,29 +149,38 @@
     position: relative; z-index: 2;
     padding: 2.5rem;
     width: 100%;
+    display: flex; flex-direction: column;
   }
+  /* HEADER fixed */
   .featured-meta {
-    display: flex; align-items: center; gap: 1rem;
+    flex-shrink: 0;
+    display: flex; flex-direction: column; gap: 0.35rem;
     margin-bottom: 1rem;
   }
   .featured-client {
     font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.16em;
-    text-transform: uppercase; color: var(--accent); 
+    text-transform: uppercase; color: var(--accent);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;
   }
   .featured-type {
     font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em;
     text-transform: uppercase; color: var(--muted);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;
   }
   .featured-title {
     font-family: var(--sans); font-size: clamp(1.8rem, 3vw, 2.8rem);
     font-weight: 300; line-height: 1.05; color: var(--text);
     margin-bottom: 1rem; letter-spacing: -0.02em;
   }
+  /* BODY grows */
   .featured-desc {
     font-size: 0.78rem; line-height: 1.75; color: var(--muted);
     max-width: 52ch; margin-bottom: 1.5rem;
+    flex: 1;
   }
+  /* FOOTER fixed */
   .featured-metrics {
+    flex-shrink: 0;
     display: flex; gap: 2rem; flex-wrap: wrap;
     margin-bottom: 1.5rem;
     padding-top: 1.25rem;
@@ -188,6 +196,7 @@
     text-transform: uppercase; color: var(--muted);
   }
   .featured-tags {
+    flex-shrink: 0;
     display: flex; gap: 0.4rem; flex-wrap: wrap;
   }
   .featured-tags span {
@@ -263,11 +272,11 @@
   }
   [data-theme="light"] .featured-title,
   [data-theme="light"] .featured-desc,
-  [data-theme="light"] .featured-client,
   [data-theme="light"] .metric-val,
   [data-theme="light"] .metric-label,
   [data-theme="light"] .featured-tags span { color: var(--text); }
-  [data-theme="light"] .featured-type { color: var(--muted); }
+  [data-theme="light"] .featured-client { color: #443CAF; }
+  [data-theme="light"] .featured-type { color: #212121; }
   [data-theme="light"] .featured-metrics { border-top-color: rgba(0,0,0,0.1); }
   [data-theme="light"] .featured-tags span { background: rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.1); }
 
@@ -973,7 +982,7 @@
     <div class="featured-overlay"></div>
     <div class="featured-content">
       <div class="featured-meta">
-        <span class="featured-client">Enterprise Client · AI Product</span>
+        <span class="featured-client">Enterprise · AI Product</span>
         <span class="featured-type">AI Product · Chat Interface</span>
       </div>
       <h3 class="featured-title">AI Chat<br>System</h3>
@@ -995,7 +1004,7 @@
     <div class="featured-overlay"></div>
     <div class="featured-content">
       <div class="featured-meta">
-        <span class="featured-client">Enterprise Client · Dev Tools</span>
+        <span class="featured-client">Enterprise · Dev Tools</span>
         <span class="featured-type" data-en="Dev Handoff · Documentation" data-pt="Handoff · Documentação">Dev Handoff · Documentation</span>
       </div>
       <h3 class="featured-title">CRUD &<br>Dev Handoff</h3>
@@ -1016,7 +1025,7 @@
     <div class="featured-overlay gcb-overlay"></div>
     <div class="featured-content">
       <div class="featured-meta">
-        
+        <span class="featured-client">Grupo Casas Bahia · Platform</span>
         <span class="featured-type">APIM · Developer Portal · Design System</span>
       </div>
       <h3 class="featured-title">API Management<br>& Developer Platform</h3>
