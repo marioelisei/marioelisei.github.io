@@ -428,10 +428,14 @@
     align-self: flex-start; padding: 1px;
   }
   .hero-cta-row {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem;
+    white-space: nowrap;
   }
   .hero-figma-btn {
     width: 100%; justify-content: center; box-sizing: border-box;
+  }
+  .btn-aboutme, .btn-featured, .btn-viewwork {
+    justify-content: center;
   }
   .ai-generating {
     display: flex; align-items: center; gap: 0.5rem;
@@ -661,7 +665,7 @@
     display: block;
   }
   .contact > * { position: relative; z-index: 1; }
-  .contact-right { align-self: flex-end; }
+  .contact-right { align-self: flex-end; margin-left: auto; }
   .contact-left { margin-top: 8rem; }
   .contact-pre {
     font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.18em;
@@ -723,16 +727,16 @@
     .about-left { padding: 3rem 1.25rem; border-right: none; border-bottom: 0.5px solid var(--line); }
     .about-right { padding: 3rem 1.25rem; }
     .contact { flex-direction: column; align-items: flex-start; }
-    .contact-right { text-align: left; }
+    .contact-right { text-align: right; margin-left: auto; }
     .footer { padding: 1.25rem; flex-direction: column; gap: 0.75rem; text-align: center; }
     .footer-r { justify-content: center; }
     .hero-cta-row { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
     .nav-status { gap: 0.35rem; font-size: 0.55rem; }
     .cc-logo { width: 13px; height: 13px; }
   }
-  @media (max-width: 480px) {
-    .hero-cta-row { grid-template-columns: 1fr 1fr; }
-    .hero-cta-row a:first-child { grid-column: span 2; }
+  @media (max-width: 520px) {
+    .hero-cta-row { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+    .hero-cta-row a:first-child { grid-column: 1 / -1; }
   }
 </style>
 </head>
@@ -907,8 +911,6 @@
     <div class="about-actions">
       <a href="https://ca.linkedin.com/in/marioelisei" class="btn btn-linkedin" target="_blank" rel="noopener"><i class="ti ti-brand-linkedin" aria-hidden="true"></i> LinkedIn</a>
       <a href="https://github.com/marioelisei" class="btn btn-github" target="_blank" rel="noopener"><i class="ti ti-brand-github" aria-hidden="true"></i> GitHub</a>
-      <a href="https://be.net/marioelisei" class="btn btn-behance" target="_blank" rel="noopener"><i class="ti ti-brand-behance" aria-hidden="true"></i> Behance</a>
-      <a href="http://dribbble.com/marioelisei" class="btn btn-dribbble" target="_blank" rel="noopener"><i class="ti ti-brand-dribbble" aria-hidden="true"></i> Dribbble</a>
     </div>
   </div>
   <div class="about-right">
@@ -1163,7 +1165,6 @@
     <h2 class="contact-heading" data-en="Designing and engineering AI-driven <br>ecosystems for <b>enterprise platforms.</b>" data-pt="Projetando e desenvolvendo ecossistemas <br>orientados a IA para <b>plataformas corporativas.</b>">Designing and engineering AI-driven <br>ecosystems for  <b>enterprise platforms.</b></h2>
     <div class="contact-links">
       <a href="mailto:marioelisei@gmail.com" class="btn btn-sendmsg" data-en="Send message" data-pt="Enviar mensagem"><i class="ti ti-mail" aria-hidden="true"></i> <span>Send message</span></a>
-      <a href="https://be.net/marioelisei" class="btn btn-behance" target="_blank" rel="noopener"><i class="ti ti-brand-behance" aria-hidden="true"></i> Behance</a>
       <a href="https://www.figma.com/design/GsycsVjrjQzvRAzWYgmgRy/1---Projects-%7C-Various?node-id=27-529&t=VP6NlUCPEdQ7dRt6-4" class="btn figma-btn" target="_blank" rel="noopener"><i class="ti ti-brand-figma" aria-hidden="true"></i> Request Figma access</a>
     </div>
   </div>
@@ -1171,7 +1172,6 @@
     <a href="mailto:marioelisei@gmail.com">marioelisei@gmail.com</a>
     <a href="https://ca.linkedin.com/in/marioelisei" target="_blank" rel="noopener">linkedin.com/in/marioelisei</a>
     <a href="https://github.com/marioelisei" target="_blank" rel="noopener">github.com/marioelisei</a>
-    <a href="https://be.net/marioelisei" target="_blank" rel="noopener">behance.net/marioelisei</a>
   </div>
 </section>
 
@@ -1186,7 +1186,6 @@
   <div class="footer-r">
     <a href="#">Top ↑</a>
     <a href="https://github.com/marioelisei" target="_blank" rel="noopener">GitHub</a>
-    <a href="https://be.net/marioelisei" target="_blank" rel="noopener">Behance</a>
   </div>
 </footer>
 
