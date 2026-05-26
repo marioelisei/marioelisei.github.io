@@ -275,7 +275,7 @@
   [data-theme="light"] .metric-val,
   [data-theme="light"] .metric-label,
   [data-theme="light"] .featured-tags span { color: var(--text); }
-  [data-theme="light"] .featured-client { color: #7C6BFF; }
+  [data-theme="light"] .featured-client { color: #2E2480; }
   [data-theme="light"] .featured-type { color: #212121; }
   [data-theme="light"] .featured-metrics { border-top-color: rgba(0,0,0,0.1); }
   [data-theme="light"] .featured-tags span { background: rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.1); }
@@ -1038,14 +1038,14 @@
     <div class="featured-content">
       <div class="featured-meta">
         <span class="featured-client">Grupo Casas Bahia · Platform</span>
-        <span class="featured-type">APIM · Developer Portal · Design System</span>
+        <span class="featured-type">Developer Portal · Design System</span>
       </div>
       <h3 class="featured-title">Developer Portal<br>& MKTP/B2B/B2C</h3>
       <p class="featured-desc" data-en="End-to-end design of an API Management platform and Developer Portal serving three of Brazil's largest retail brands — Casas Bahia, Ponto and Extra.com. Designed for sellers and integrators accessing the Marketplace APIs, covering B2B and B2C flows across the entire Grupo Casas Bahia ecosystem." data-pt="Design completo de uma plataforma de API Management e Developer Portal para três das maiores marcas do varejo brasileiro — Casas Bahia, Ponto e Extra.com. Desenhado para sellers e integradoras que consomem as APIs do Marketplace, cobrindo fluxos B2B e B2C em todo o ecossistema do Grupo Casas Bahia.">End-to-end design of an API Management platform and Developer Portal serving three of Brazil's largest retail brands — Casas Bahia, Ponto and Extra.com. Designed for sellers and integrators accessing the Marketplace APIs, covering B2B and B2C flows across the entire Grupo Casas Bahia ecosystem.</p>
       <div class="featured-metrics">
         <div class="metric"><span class="metric-val">3</span><span class="metric-label" data-en="Brands" data-pt="Marcas">Brands</span></div>
-        <div class="metric"><span class="metric-val">1000s</span><span class="metric-label" data-en="APIs" data-pt="APIs">APIs</span></div>
-        <div class="metric"><span class="metric-val">B2B+B2C</span><span class="metric-label" data-en="Coverage" data-pt="Cobertura">Coverage</span></div>
+        <div class="metric"><span class="metric-val">1200+</span><span class="metric-label" data-en="APIs" data-pt="APIs">APIs</span></div>
+        <div class="metric"><span class="metric-val">MKTP+B2B+B2C</span><span class="metric-label" data-en="Coverage" data-pt="Cobertura">Coverage</span></div>
         <div class="metric"><span class="metric-val">APIM</span><span class="metric-label" data-en="+ Dev Portal" data-pt="+ Dev Portal">+ Dev Portal</span></div>
         <div class="metric"><span class="metric-val">DS</span><span class="metric-label" data-en="Core" data-pt="Core">Core</span></div>
       </div>
@@ -1069,7 +1069,7 @@
         <p class="featured-desc" data-en="Upstreams, Extensions, Permissions, Deployments and Configuration — full 5-module APIM platform designed for internal teams managing thousands of API endpoints." data-pt="Upstreams, Extensions, Permissions, Deployments e Configuration — plataforma APIM completa com 5 módulos para times internos gerenciando milhares de endpoints.">Upstreams, Extensions, Permissions, Deployments and Configuration — full 5-module APIM platform designed for internal teams managing thousands of API endpoints.</p>
         <div class="featured-metrics">
           <div class="metric"><span class="metric-val">5</span><span class="metric-label" data-en="Modules" data-pt="Módulos">Modules</span></div>
-          <div class="metric"><span class="metric-val">1200+</span><span class="metric-label">Endpoints</span></div>
+          <div class="metric"><span class="metric-val">35200+</span><span class="metric-label">Endpoints</span></div>
         </div>
         <div class="featured-tags"><span>APIM</span><span>Gateway</span><span>Permissions</span></div>
       </div>
@@ -1159,8 +1159,8 @@
 <section class="contact">
   <canvas id="ambient-grid-contact"></canvas>
   <div class="contact-left">
-    <p class="contact-pre" data-en="// get in touch" data-pt="// entre em contato">// get in touch</p>
-    <h2 class="contact-heading" data-en="Let's engineer<br>something <b>great.</b>" data-pt="Vamos engenheirar<br>algo <b>incrível.</b>">Let's engineer<br>something <b>great.</b></h2>
+    <p class="contact-pre" data-en="// CURRENTLY" data-pt="// entre em contato">// CURRENTLY</p>
+    <h2 class="contact-heading" data-en="Designing and engineering AI-driven <br>ecosystems for <b>enterprise platforms.</b>" data-pt="Projetando e desenvolvendo ecossistemas <br>orientados a IA para <b>plataformas corporativas.</b>">Designing and engineering AI-driven <br>ecosystems for  <b>enterprise platforms.</b></h2>
     <div class="contact-links">
       <a href="mailto:marioelisei@gmail.com" class="btn btn-sendmsg" data-en="Send message" data-pt="Enviar mensagem"><i class="ti ti-mail" aria-hidden="true"></i> <span>Send message</span></a>
       <a href="https://be.net/marioelisei" class="btn btn-behance" target="_blank" rel="noopener"><i class="ti ti-brand-behance" aria-hidden="true"></i> Behance</a>
@@ -1332,175 +1332,91 @@
 </script>
 
 <script>
-(function() {
-  const canvas = document.getElementById('ambient-grid');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-
-  const CELL = 20; // tamanho da célula em px
-  const RADIUS = 150; // raio de influência do mouse
-  const MAX_OPACITY = 0.45;
-  const BASE_OPACITY = 0.06;
-
-  let mouse = { x: -9999, y: -9999 };
-  let nodes = [];
-  let W, H;
-
-  function resize() {
-    W = canvas.offsetWidth;
-    H = canvas.offsetHeight;
-    canvas.width = W;
-    canvas.height = H;
-    buildNodes();
-    draw();
-  }
-
-  function buildNodes() {
-    nodes = [];
-    const cols = Math.ceil(W / CELL) + 1;
-    const rows = Math.ceil(H / CELL) + 1;
-    for (let r = 0; r <= rows; r++) {
-      for (let c = 0; c <= cols; c++) {
-        nodes.push({ x: c * CELL, y: r * CELL });
-      }
-    }
-  }
-
-  function draw() {
-    ctx.clearRect(0, 0, W, H);
-
-    // Linhas verticais
-    const cols = Math.ceil(W / CELL) + 1;
-    const rows = Math.ceil(H / CELL) + 1;
-
-    for (let c = 0; c <= cols; c++) {
-      const x = c * CELL;
-      for (let r = 0; r < rows; r++) {
-        const y = r * CELL;
-        const dist = Math.hypot(mouse.x - x, mouse.y - y);
-        const t = Math.max(0, 1 - dist / RADIUS);
-        const op = BASE_OPACITY + (MAX_OPACITY - BASE_OPACITY) * t;
-        ctx.beginPath();
-        ctx.moveTo(x, y);
-        ctx.lineTo(x, y + CELL);
-        ctx.strokeStyle = `rgba(124,107,255,${op})`;
-        ctx.lineWidth = 0.5;
-        ctx.stroke();
-      }
-    }
-
-    // Linhas horizontais
-    for (let r = 0; r <= rows; r++) {
-      const y = r * CELL;
-      for (let c = 0; c < cols; c++) {
-        const x = c * CELL;
-        const dist = Math.hypot(mouse.x - x, mouse.y - y);
-        const t = Math.max(0, 1 - dist / RADIUS);
-        const op = BASE_OPACITY + (MAX_OPACITY - BASE_OPACITY) * t;
-        ctx.beginPath();
-        ctx.moveTo(x, y);
-        ctx.lineTo(x + CELL, y);
-        ctx.strokeStyle = `rgba(124,107,255,${op})`;
-        ctx.lineWidth = 0.5;
-        ctx.stroke();
-      }
-    }
-  }
-
-  // Evento de mouse — usa pageY para coordenada correta com scroll
-  window.addEventListener('mousemove', function(e) {
-    const rect = canvas.getBoundingClientRect();
-    mouse.x = e.clientX - rect.left;
-    mouse.y = e.pageY - (rect.top + window.scrollY);
-    draw();
-  });
-
-  window.addEventListener('mouseleave', function() {
-    mouse = { x: -9999, y: -9999 };
-    draw();
-  });
-
-  window.addEventListener('resize', resize);
-
-  // Init
-  resize();
-})();
-
-// === CONTACT GRID ===
-(function() {
-  const canvas = document.getElementById('ambient-grid-contact');
+// Função compartilhada para criar o grid animado
+function createAmbientGrid(canvasId) {
+  const canvas = document.getElementById(canvasId);
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
 
   const CELL = 20;
-  const RADIUS = 150;
-  const MAX_OPACITY = 0.45;
-  const BASE_OPACITY = 0.06;
+  const RADIUS = 180;       // raio reduzido, difusão mantida via smoothstep
+  const MAX_OPACITY = 0.55;
+  const BASE_OPACITY = 0.05;
+  const LERP = 0.06;        // 0 = sem arrasto, 1 = instantâneo — 0.06 ≈ arrasto suave
 
-  let mouse = { x: -9999, y: -9999 };
-  let W, H;
+  // Posição real do mouse (atualizada instantaneamente)
+  let target = { x: -9999, y: -9999 };
+  // Posição interpolada (segue o target com delay)
+  let current = { x: -9999, y: -9999 };
+  let W, H, rafId;
 
   function resize() {
     W = canvas.offsetWidth;
     H = canvas.offsetHeight;
     canvas.width = W;
     canvas.height = H;
-    draw();
   }
 
   function draw() {
+    // Lerp — interpola current em direção a target
+    current.x += (target.x - current.x) * LERP;
+    current.y += (target.y - current.y) * LERP;
+
     ctx.clearRect(0, 0, W, H);
+
     const cols = Math.ceil(W / CELL) + 1;
     const rows = Math.ceil(H / CELL) + 1;
 
     for (let c = 0; c <= cols; c++) {
       const x = c * CELL;
-      for (let r = 0; r < rows; r++) {
+      for (let r = 0; r <= rows; r++) {
         const y = r * CELL;
-        const dist = Math.hypot(mouse.x - x, mouse.y - y);
-        const t = Math.max(0, 1 - dist / RADIUS);
+        const dist = Math.hypot(current.x - x, current.y - y);
+        // Falloff suave quadrático (smoothstep) — mais difuso que linear
+        const nd = Math.min(dist / RADIUS, 1);
+        const t = 1 - nd * nd * (3 - 2 * nd); // smoothstep
         const op = BASE_OPACITY + (MAX_OPACITY - BASE_OPACITY) * t;
-        ctx.beginPath();
-        ctx.moveTo(x, y);
-        ctx.lineTo(x, y + CELL);
-        ctx.strokeStyle = `rgba(124,107,255,${op})`;
-        ctx.lineWidth = 0.5;
-        ctx.stroke();
+
+        if (c < cols) {
+          ctx.beginPath();
+          ctx.moveTo(x, y);
+          ctx.lineTo(x + CELL, y);
+          ctx.strokeStyle = `rgba(124,107,255,${op})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+        if (r < rows) {
+          ctx.beginPath();
+          ctx.moveTo(x, y);
+          ctx.lineTo(x, y + CELL);
+          ctx.strokeStyle = `rgba(124,107,255,${op})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
       }
     }
-    for (let r = 0; r <= rows; r++) {
-      const y = r * CELL;
-      for (let c = 0; c < cols; c++) {
-        const x = c * CELL;
-        const dist = Math.hypot(mouse.x - x, mouse.y - y);
-        const t = Math.max(0, 1 - dist / RADIUS);
-        const op = BASE_OPACITY + (MAX_OPACITY - BASE_OPACITY) * t;
-        ctx.beginPath();
-        ctx.moveTo(x, y);
-        ctx.lineTo(x + CELL, y);
-        ctx.strokeStyle = `rgba(124,107,255,${op})`;
-        ctx.lineWidth = 0.5;
-        ctx.stroke();
-      }
-    }
+
+    rafId = requestAnimationFrame(draw);
   }
 
   window.addEventListener('mousemove', function(e) {
     const rect = canvas.getBoundingClientRect();
-    mouse.x = e.clientX - rect.left;
-    mouse.y = e.pageY - (rect.top + window.scrollY);
-    draw();
+    target.x = e.clientX - rect.left;
+    target.y = e.pageY - (rect.top + window.scrollY);
   });
 
   window.addEventListener('mouseleave', function() {
-    mouse = { x: -9999, y: -9999 };
-    draw();
+    target = { x: -9999, y: -9999 };
   });
 
   window.addEventListener('resize', resize);
-  resize();
-})();
 
+  resize();
+  draw();
+}
+
+createAmbientGrid('ambient-grid');
+createAmbientGrid('ambient-grid-contact');
 </script>
 </body>
 </html>
