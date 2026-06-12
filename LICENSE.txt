@@ -1,7 +1,5 @@
 Professional Courtesy & Copyright Notice
 
-COPYRIGHT (C) 2026 MARIO ELISEI
-
 This portfolio represents MORE THAN 15 YEARS OF PROFESSIONAL EXPERIENCE in Design, Technology, User Experience, Product Development, and Artificial Intelligence.
 
 The work presented here reflects years of research, experimentation, learning, and professional practice. Each project, case study, design system, interface, visual asset, and technical demonstration represents a significant investment of time, knowledge, and expertise.
@@ -19,3 +17,4 @@ Original work deserves recognition, respect, and proper attribution. Thank you f
 For permissions, licensing inquiries, collaboration opportunities, or portfolio access requests:
 
 MARIOELISEI@GMAIL.COM
+COPYRIGHT (C) 2026 MARIO ELISEI
