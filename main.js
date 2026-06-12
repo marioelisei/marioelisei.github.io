@@ -984,7 +984,8 @@ function closeAIModal() {
   }, 300);
 }
 
-document.getElementById('aiDemoModal').addEventListener('click', function(e) {
+const _aiDemoModal = document.getElementById('aiDemoModal');
+if (_aiDemoModal) _aiDemoModal.addEventListener('click', function(e) {
   if (e.target === this) closeAIModal();
 });
 
